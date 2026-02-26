@@ -1,0 +1,100 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <a routerLink="/" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+          <span class="text-gold text-xl">◆</span>
+        </div>
+        <span class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-gold transition-colors">
+          JewelCart
+        </span>
+      </a>
+
+        <nav class="hidden md:flex items-center gap-8">
+        <a routerLink="/" routerLinkActive="text-gold" [routerLinkActiveOptions]="{exact: true}" 
+           class="text-white/80 hover:text-gold transition-colors">Home</a>
+        <a routerLink="/products" routerLinkActive="text-gold" 
+           class="text-white/80 hover:text-gold transition-colors">Shop</a>
+        <a routerLink="/orders" routerLinkActive="text-gold" *ngIf="isLoggedIn"
+           class="text-white/80 hover:text-gold transition-colors">Orders</a>
+        <a routerLink="/admin/add-product" routerLinkActive="text-gold" *ngIf="isAdmin"
+           class="text-white/80 hover:text-gold transition-colors">Add Product</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a routerLink="/cart" class="relative p-2 text-white/80 hover:text-gold transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span *ngIf="cartItemCount > 0" 
+                class="absolute -top-1 -right-1 w-5 h-5 bg-accent text-white text-xs rounded-full flex items-center justify-center">
+            {{ cartItemCount }}
+          </span>
+        </a>
+
+        @if (isLoggedIn) {
+          <div class="relative">
+            <button (click)="toggleDropdown()" 
+                    class="flex items-center gap-2 text-white/80 hover:text-gold transition-colors">
+              <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                <span class="text-gold text-sm">{{ userInitials }}</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            
+            @if (dropdownOpen) {
+              <div class="absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-xl border border-white/10 py-2">
+                <p class="px-4 py-2 text-sm text-white/60">{{ userEmail }}</p>
+                <hr class="border-white/10 my-2">
+                <a routerLink="/orders" (click)="dropdownOpen = false"
+                   class="block px-4 py-2 text-sm text-white/80 hover:bg-white/5 hover:text-gold transition-colors">
+                  My Orders
+                </a>
+                <a routerLink="/admin/add-product" (click)="dropdownOpen = false" *ngIf="isAdmin"
+                   class="block px-4 py-2 text-sm text-white/80 hover:bg-white/5 hover:text-gold transition-colors">
+                  Add Product
+                </a>
+                <button (click)="logout()"
+                        class="w-full text-left px-4 py-2 text-sm text-white/80 hover:bg-white/5 hover:text-accent transition-colors">
+                  Logout
+                </button>
+              </div>
+            }
+          </div>
+        } @else {
+          <a routerLink="/login" 
+             class="hidden sm:block text-white/80 hover:text-gold transition-colors">Login</a>
+          <a routerLink="/register" 
+             class="btn-primary text-sm py-2 px-4">Sign Up</a>
+        }
+
+        <button (click)="toggleMobileMenu()" class="md:hidden p-2 text-white/80 hover:text-gold">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    @if (mobileMenuOpen) {
+      <div class="md:hidden border-t border-white/5 py-4">
+        <nav class="flex flex-col gap-4">
+          <a routerLink="/" (click)="mobileMenuOpen = false"
+             class="text-white/80 hover:text-gold transition-colors">Home</a>
+          <a routerLink="/products" (click)="mobileMenuOpen = false"
+             class="text-white/80 hover:text-gold transition-colors">Shop</a>
+          <a routerLink="/orders" *ngIf="isLoggedIn" (click)="mobileMenuOpen = false"
+             class="text-white/80 hover:text-gold transition-colors">Orders</a>
+          <a routerLink="/admin/add-product" *ngIf="isAdmin" (click)="mobileMenuOpen = false"
+             class="text-white/80 hover:text-gold transition-colors">Add Product</a>
+          <a routerLink="/login" *ngIf="!isLoggedIn" (click)="mobileMenuOpen = false"
+             class="text-white/80 hover:text-gold transition-colors">Login</a>
+          <a routerLink="/register" *ngIf="!isLoggedIn" (click)="mobileMenuOpen = false"
+             class="btn-primary text-center text-sm">Sign Up</a>
+        </nav>
+      </div>
+    }
+  </div>
+</header>

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: jewelcart-db
+    environment:
+      POSTGRES_DB: jewelcart
+      POSTGRES_USER: jewelcart_user
+      POSTGRES_PASSWORD: jewelcart_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jewelcart_user -d jewelcart"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jewelcart-app
+    ports:
+      - "80:80"
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://jewelcart_user:jewelcart_pass@postgres:5432/jewelcart
+      JWT_SECRET: jewelcart-secret-key-change-in-production
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

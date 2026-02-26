@@ -1,0 +1,81 @@
+<div class="pt-20 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white mb-8">
+      My Orders
+    </h1>
+
+    @if (loading) {
+      <div class="space-y-4">
+        @for (i of [1,2,3]; track i) {
+          <div class="bg-surface rounded-xl p-6 animate-pulse">
+            <div class="flex justify-between">
+              <div class="space-y-3">
+                <div class="h-4 bg-white/5 rounded w-24"></div>
+                <div class="h-6 bg-white/5 rounded w-48"></div>
+              </div>
+              <div class="h-6 bg-white/5 rounded w-20"></div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (orders.length === 0) {
+      <div class="text-center py-20">
+        <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-surface flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </div>
+        <p class="text-white/60 text-lg mb-4">No orders yet</p>
+        <a routerLink="/products" class="btn-primary">
+          Start Shopping
+        </a>
+      </div>
+    } @else {
+      <div class="space-y-4">
+        @for (order of orders; track order.id) {
+          <div class="bg-surface rounded-xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+              <div>
+                <p class="text-white/60 text-sm">Order #{{ order.id }}</p>
+                <p class="text-white font-semibold text-lg">
+                  ${{ order.totalAmount.toLocaleString() }}
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                @switch (order.paymentStatus) {
+                  @case ('paid') {
+                    <span class="px-3 py-1 bg-green-500/20 text-green-400 text-sm rounded-full">
+                      Paid
+                    </span>
+                  }
+                  @case ('pending') {
+                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 text-sm rounded-full">
+                      Pending
+                    </span>
+                  }
+                  @default {
+                    <span class="px-3 py-1 bg-red-500/20 text-red-400 text-sm rounded-full">
+                      Failed
+                    </span>
+                  }
+                }
+                <span class="px-3 py-1 bg-gold/20 text-gold text-sm rounded-full capitalize">
+                  {{ order.status }}
+                </span>
+              </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-4">
+              <p class="text-white/60 text-sm mb-2">Shipping Address</p>
+              <p class="text-white/80">{{ order.shippingAddress }}</p>
+            </div>
+
+            <p class="text-white/40 text-sm mt-4">
+              {{ order.createdAt | date:'medium' }}
+            </p>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
