@@ -1,17 +1,7 @@
 <div class="pt-20 min-h-screen">
   @if (loading) {
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="animate-pulse">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div class="aspect-square bg-surface rounded-xl"></div>
-          <div class="space-y-4">
-            <div class="h-4 bg-surface rounded w-1/4"></div>
-            <div class="h-8 bg-surface rounded w-3/4"></div>
-            <div class="h-6 bg-surface rounded w-1/4"></div>
-            <div class="h-24 bg-surface rounded"></div>
-          </div>
-        </div>
-      </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+      <p class="text-white/60 text-lg">Loading... (ID: {{ productId }})</p>
     </div>
   } @else if (product) {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -48,7 +38,7 @@
             {{ product.name }}
           </h1>
           <p class="text-3xl text-white font-semibold mb-6">
-            ${{ product.price.toLocaleString() }}
+            {{ formatCurrency(product.price) }}
           </p>
 
           <p class="text-white/70 mb-8 leading-relaxed">
@@ -86,7 +76,7 @@
               </div>
 
               <button (click)="addToCart()" class="btn-primary flex-1">
-                Add to Cart - ${{ (product.price * quantity).toLocaleString() }}
+                Add to Cart - {{ formatCurrency(product.price * quantity) }}
               </button>
             </div>
           }

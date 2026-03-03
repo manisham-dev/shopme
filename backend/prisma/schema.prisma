@@ -34,6 +34,10 @@ model User {
   firstName    String?    @map("first_name")
   lastName     String?    @map("last_name")
   phone        String?
+  address      String?
+  city         String?
+  state        String?
+  zipCode      String?    @map("zip_code")
   role         Role       @default(USER)
   createdAt    DateTime   @default(now()) @map("created_at")
   updatedAt    DateTime   @updatedAt @map("updated_at")
@@ -70,6 +74,7 @@ model Order {
   shippingAddress String       @db.Text @map("shipping_address")
   paymentStatus   PaymentStatus @default(PENDING) @map("payment_status")
   stripePaymentId String?      @map("stripe_payment_id")
+  razorpayPaymentId String?    @map("razorpay_payment_id")
   createdAt       DateTime     @default(now()) @map("created_at")
   updatedAt       DateTime     @updatedAt @map("updated_at")
 

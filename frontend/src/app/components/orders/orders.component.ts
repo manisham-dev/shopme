@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models';
+import { formatCurrency } from '../../constants/api.constants';
 
 @Component({
   selector: 'app-orders',
@@ -12,6 +13,7 @@ import { Order } from '../../models';
 })
 export class OrdersComponent implements OnInit {
   private orderService = inject(OrderService);
+  formatCurrency = formatCurrency;
 
   orders: Order[] = [];
   loading = true;

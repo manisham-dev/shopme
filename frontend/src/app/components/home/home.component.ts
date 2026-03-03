@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models';
-import { API_URLS, getImageUrl } from '../../constants/api.constants';
+import { API_URLS, getImageUrl, formatCurrency } from '../../constants/api.constants';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +14,12 @@ import { API_URLS, getImageUrl } from '../../constants/api.constants';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private productService = inject(ProductService);
+  private cdr = inject(ChangeDetectorRef);
   private subscription: Subscription = new Subscription();
   
   featuredProducts: Product[] = [];
   getImageUrl = getImageUrl;
+  formatCurrency = formatCurrency;
   
   categories = [
     { name: 'Rings', image: `${API_URLS.images}/ring1.jpg`, count: 12 },
@@ -27,12 +29,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit(): void {
-    console.log('HomeComponent initialized');
     this.subscription.add(
       this.productService.getFeaturedProducts().subscribe({
         next: (products) => {
-          console.log('Featured products loaded:', products.length);
           this.featuredProducts = products;
+          this.cdr.detectChanges();
         },
         error: (err) => console.error('Failed to load featured products', err)
       })

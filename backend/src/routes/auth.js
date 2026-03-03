@@ -46,7 +46,12 @@ router.post('/register', async (req, res) => {
         id: user.id,
         email: user.email,
         firstName: user.firstName,
-        lastName: user.lastName
+        lastName: user.lastName,
+        phone: user.phone,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
       }
     });
   } catch (error) {
@@ -88,6 +93,11 @@ router.post('/login', async (req, res) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        phone: user.phone,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
         role: user.role
       }
     });
@@ -116,6 +126,10 @@ router.get('/me', async (req, res) => {
         firstName: true,
         lastName: true,
         phone: true,
+        address: true,
+        city: true,
+        state: true,
+        zipCode: true,
         role: true,
         createdAt: true,
       },
@@ -131,11 +145,60 @@ router.get('/me', async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       phone: user.phone,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      zipCode: user.zipCode,
       role: user.role,
       createdAt: user.createdAt
     });
   } catch (error) {
     res.status(403).json({ message: 'Invalid token' });
+  }
+});
+
+router.put('/address', async (req, res) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const { firstName, lastName, phone, address, city, state, zipCode } = req.body;
+    console.log('Update address request:', { userId: decoded.userId, firstName, lastName, phone, address, city, state, zipCode });
+
+    const user = await prisma.user.update({
+      where: { id: decoded.userId },
+      data: {
+        firstName,
+        lastName,
+        phone,
+        address,
+        city,
+        state,
+        zipCode,
+      },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phone: true,
+        address: true,
+        city: true,
+        state: true,
+        zipCode: true,
+        role: true,
+      },
+    });
+
+    res.json(user);
+  } catch (error) {
+    console.error('Update address error:', error);
+    res.status(500).json({ message: 'Failed to update address' });
   }
 });
 

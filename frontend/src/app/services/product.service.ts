@@ -25,8 +25,9 @@ export class ProductService {
 
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();
+    if (!token) return new HttpHeaders();
     return new HttpHeaders({
-      'Authorization': token ? `Bearer ${token}` : ''
+      'Authorization': `Bearer ${token}`
     });
   }
 

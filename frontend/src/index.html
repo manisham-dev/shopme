@@ -7,13 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Discover exquisite jewelry at JewelCart. Premium rings, necklaces, earrings, and bracelets.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script>
-    window.onerror = function(msg, url, line, col, error) {
-      document.body.innerHTML = '<div style="color:red;padding:20px;font-family:sans-serif;"><h1>Error</h1><pre>' + msg + '\n' + error.stack + '</pre></div>';
-    };
-  </script>
 </head>
 <body class="bg-background">
   <app-root><div style="padding:50px;text-align:center;color:#666;">Loading...</div></app-root>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </body>
 </html>

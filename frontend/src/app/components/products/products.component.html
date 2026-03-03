@@ -77,7 +77,7 @@
 
           <div *ngIf="products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div *ngFor="let product of products" class="card group">
-              <a [routerLink]="['/products', product.id]">
+              <a [routerLink]="['/product-detail', product.id]">
                 <div class="relative aspect-square overflow-hidden bg-surface">
                   <img [src]="getImageUrl(product.imageUrl)" [alt]="product.name"
                        (error)="onImageError($event)"
@@ -92,12 +92,12 @@
               </a>
               <div class="p-4">
                 <p class="text-gold text-sm mb-1">{{ product.category }}</p>
-                <a [routerLink]="['/products', product.id]">
+                <a [routerLink]="['/product-detail', product.id]">
                   <h3 class="text-white font-medium mb-2 group-hover:text-gold transition-colors truncate">
                     {{ product.name }}
                   </h3>
                 </a>
-                <p class="text-white/80 font-semibold mb-4">${{ product.price.toLocaleString() }}</p>
+                <p class="text-white/80 font-semibold mb-4">{{ formatCurrency(product.price) }}</p>
                 <button *ngIf="product.stockQuantity > 0" (click)="addToCart(product)" 
                         class="w-full btn-primary text-sm py-2">
                   Add to Cart

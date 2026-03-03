@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
     const where = {};
 
     if (category) {
-      where.category = category;
+      where.category = { equals: category, mode: 'insensitive' };
     }
 
     if (minPrice || maxPrice) {
@@ -153,6 +153,37 @@ router.get('/categories', async (req, res) => {
   } catch (error) {
     console.error('Get categories error:', error);
     res.status(500).json({ message: 'Failed to fetch categories' });
+  }
+});
+
+router.post('/details', async (req, res) => {
+  try {
+    const { productIds } = req.body;
+    
+    if (!productIds || !Array.isArray(productIds)) {
+      return res.status(400).json({ message: 'Product IDs array is required' });
+    }
+
+    const products = await prisma.product.findMany({
+      where: { id: { in: productIds } }
+    });
+
+    res.json({
+      items: products.map(p => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        price: parseFloat(p.price),
+        category: p.category,
+        imageUrl: getImageUrl(p.imageUrl),
+        stockQuantity: p.stockQuantity,
+        isFeatured: p.isFeatured
+      })),
+      total: products.reduce((sum, p) => sum + parseFloat(p.price), 0)
+    });
+  } catch (error) {
+    console.error('Get product details error:', error);
+    res.status(500).json({ message: 'Failed to fetch product details' });
   }
 });
 

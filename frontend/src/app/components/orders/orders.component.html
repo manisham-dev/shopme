@@ -38,7 +38,7 @@
               <div>
                 <p class="text-white/60 text-sm">Order #{{ order.id }}</p>
                 <p class="text-white font-semibold text-lg">
-                  ${{ order.totalAmount.toLocaleString() }}
+                  {{ formatCurrency(order.totalAmount) }}
                 </p>
               </div>
               <div class="flex items-center gap-3">

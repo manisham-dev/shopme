@@ -28,16 +28,19 @@ router.get('/', authenticateToken, async (req, res) => {
         name: item.product.name,
         price: parseFloat(item.product.price),
         imageUrl: getImageUrl(item.product.imageUrl),
-        stockQuantity: item.product.stockQuantity
+        stockQuantity: item.product.stockQuantity,
+        category: item.product.category
       }
     }));
 
     const total = items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+    const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+    console.log('Cart response - itemCount:', itemCount, 'items:', items.map(i => ({id: i.id, qty: i.quantity})));
 
     res.json({
       items,
       total: Math.round(total * 100) / 100,
-      itemCount: items.length
+      itemCount
     });
   } catch (error) {
     console.error('Get cart error:', error);

@@ -25,6 +25,7 @@
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
+    "razorpay": "^2.9.6",
     "stripe": "^17.2.0",
     "uuid": "^10.0.0"
   },

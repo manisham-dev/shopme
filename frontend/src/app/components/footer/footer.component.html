@@ -17,19 +17,19 @@
         <h4 class="font-heading text-lg text-white mb-4">Quick Links</h4>
         <ul class="space-y-2">
           <li><a routerLink="/products" class="text-white/60 hover:text-gold transition-colors">Shop All</a></li>
-          <li><a routerLink="/products?featured=true" class="text-white/60 hover:text-gold transition-colors">Featured</a></li>
-          <li><a href="#" class="text-white/60 hover:text-gold transition-colors">About Us</a></li>
-          <li><a href="#" class="text-white/60 hover:text-gold transition-colors">Contact</a></li>
+          <li><a routerLink="/products" [queryParams]="{featured: true}" class="text-white/60 hover:text-gold transition-colors">Featured</a></li>
+          <li><a routerLink="/about" class="text-white/60 hover:text-gold transition-colors">About Us</a></li>
+          <li><a routerLink="/contact" class="text-white/60 hover:text-gold transition-colors">Contact</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="font-heading text-lg text-white mb-4">Categories</h4>
         <ul class="space-y-2">
-          <li><a routerLink="/products?category=Rings" class="text-white/60 hover:text-gold transition-colors">Rings</a></li>
-          <li><a routerLink="/products?category=Necklaces" class="text-white/60 hover:text-gold transition-colors">Necklaces</a></li>
-          <li><a routerLink="/products?category=Earrings" class="text-white/60 hover:text-gold transition-colors">Earrings</a></li>
-          <li><a routerLink="/products?category=Bracelets" class="text-white/60 hover:text-gold transition-colors">Bracelets</a></li>
+          <li><a routerLink="/products" [queryParams]="{category: 'Rings'}" class="text-white/60 hover:text-gold transition-colors">Rings</a></li>
+          <li><a routerLink="/products" [queryParams]="{category: 'Necklaces'}" class="text-white/60 hover:text-gold transition-colors">Necklaces</a></li>
+          <li><a routerLink="/products" [queryParams]="{category: 'Earrings'}" class="text-white/60 hover:text-gold transition-colors">Earrings</a></li>
+          <li><a routerLink="/products" [queryParams]="{category: 'Bracelets'}" class="text-white/60 hover:text-gold transition-colors">Bracelets</a></li>
         </ul>
       </div>
 
@@ -37,8 +37,8 @@
         <h4 class="font-heading text-lg text-white mb-4">Contact</h4>
         <ul class="space-y-2 text-white/60 text-sm">
           <li>Email: info&#64;jewelcart.com</li>
-          <li>Phone: +1 (555) 123-4567</li>
-          <li>Address: 123 Diamond Ave, NY</li>
+          <li>Phone: 123456789</li>
+          <li>Address: DL</li>
         </ul>
       </div>
     </div>
@@ -46,8 +46,8 @@
     <div class="border-t border-white/5 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-white/40 text-sm">© 2024 JewelCart. All rights reserved.</p>
       <div class="flex gap-4">
-        <a href="#" class="text-white/40 hover:text-gold transition-colors">Privacy Policy</a>
-        <a href="#" class="text-white/40 hover:text-gold transition-colors">Terms of Service</a>
+        <a routerLink="/privacy" class="text-white/40 hover:text-gold transition-colors">Privacy Policy</a>
+        <a routerLink="/terms" class="text-white/40 hover:text-gold transition-colors">Terms of Service</a>
       </div>
     </div>
   </div>

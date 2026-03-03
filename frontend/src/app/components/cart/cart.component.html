@@ -4,7 +4,7 @@
       Shopping Cart
     </h1>
 
-    @if (cart.items.length === 0) {
+    @if (cartService.cart() && cartService.cart().items && cartService.cart().items.length === 0) {
       <div class="text-center py-20">
         <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-surface flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,7 +19,7 @@
     } @else {
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2 space-y-4">
-          @for (item of cart.items; track item.id) {
+          @for (item of cartService.cart().items; track item.id) {
             <div class="bg-surface rounded-xl p-4 sm:p-6 flex gap-4 sm:gap-6">
               <a [routerLink]="['/products', item.product.id]" class="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-primary">
                 <img [src]="getImageUrl(item.product.imageUrl)" [alt]="item.product.name"
@@ -45,7 +45,7 @@
                 </div>
 
                 <p class="text-white/80 font-semibold mt-2">
-                  ${{ item.product.price.toLocaleString() }}
+                  {{ formatCurrency(item.product.price) }}
                 </p>
 
                 <div class="flex items-center justify-between mt-4">
@@ -70,7 +70,7 @@
                   </div>
 
                   <p class="text-white font-semibold">
-                    ${{ (item.product.price * item.quantity).toLocaleString() }}
+                    {{ formatCurrency(item.product.price * item.quantity) }}
                   </p>
                 </div>
               </div>
@@ -88,8 +88,8 @@
             
             <div class="space-y-3 text-white/80 mb-6">
               <div class="flex justify-between">
-                <span>Subtotal ({{ cart.itemCount }} items)</span>
-                <span>${{ cart.total.toLocaleString() }}</span>
+                <span>Subtotal ({{ cartService.cart().itemCount }} items)</span>
+                <span>{{ formatCurrency(cartService.cart().total) }}</span>
               </div>
               <div class="flex justify-between">
                 <span>Shipping</span>
@@ -97,7 +97,7 @@
               </div>
               <div class="border-t border-white/10 pt-3 flex justify-between text-lg font-semibold text-white">
                 <span>Total</span>
-                <span>${{ cart.total.toLocaleString() }}</span>
+                <span>{{ formatCurrency(cartService.cart().total) }}</span>
               </div>
             </div>
 

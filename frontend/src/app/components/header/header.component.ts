@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -18,7 +18,7 @@ export class HeaderComponent {
   mobileMenuOpen = false;
 
   get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+    return !!this.authService.user();
   }
 
   get isAdmin(): boolean {
@@ -26,7 +26,9 @@ export class HeaderComponent {
   }
 
   get cartItemCount(): number {
-    return this.cartService.itemCount();
+    const count = this.cartService.itemCount();
+    console.log('Header cartItemCount:', count, 'cart:', this.cartService.cart());
+    return count;
   }
 
   get userEmail(): string {

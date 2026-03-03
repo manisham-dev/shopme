@@ -45,7 +45,7 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         @for (product of featuredProducts; track product.id) {
-          <a [routerLink]="['/products', product.id]" class="card group">
+          <a [routerLink]="['/product-detail', product.id]" class="card group">
             <div class="relative aspect-square overflow-hidden bg-surface">
               <img [src]="getImageUrl(product.imageUrl)" [alt]="product.name"
                    (error)="onImageError($event)"
@@ -61,7 +61,7 @@
               <h3 class="text-white font-medium mb-2 group-hover:text-gold transition-colors truncate">
                 {{ product.name }}
               </h3>
-              <p class="text-white/80 font-semibold">${{ product.price.toLocaleString() }}</p>
+              <p class="text-white/80 font-semibold">{{ formatCurrency(product.price) }}</p>
             </div>
           </a>
         }
