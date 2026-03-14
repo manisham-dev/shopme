@@ -9,7 +9,8 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-add-product',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './add-product.component.html'
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
   private productService = inject(ProductService);

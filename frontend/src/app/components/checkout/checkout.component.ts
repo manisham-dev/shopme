@@ -14,7 +14,8 @@ declare var Razorpay: any;
   selector: 'app-checkout',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './checkout.component.html'
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
   cartService = inject(CartService);

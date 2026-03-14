@@ -10,7 +10,8 @@ import { API_URLS, getImageUrl, formatCurrency } from '../../constants/api.const
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './cart.component.html'
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
   cartService = inject(CartService);

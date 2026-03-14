@@ -1,0 +1,26 @@
+.terms-container {
+  padding-top: 5rem;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.terms-content {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.terms-title {
+  font-size: 2.25rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.terms-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.terms-text p {
+  margin-bottom: 1rem;
+}

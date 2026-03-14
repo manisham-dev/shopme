@@ -9,7 +9,8 @@ import { formatCurrency } from '../../constants/api.constants';
   selector: 'app-orders',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './orders.component.html'
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
   private orderService = inject(OrderService);

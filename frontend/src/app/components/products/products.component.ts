@@ -14,7 +14,8 @@ import { API_URLS, getImageUrl, formatCurrency } from '../../constants/api.const
   selector: 'app-products',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './products.component.html'
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   private productService = inject(ProductService);

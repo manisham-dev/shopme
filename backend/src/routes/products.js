@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
-const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000';
+const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL ?? '';
 
 const getImageUrl = (path) => {
   if (!path) return null;

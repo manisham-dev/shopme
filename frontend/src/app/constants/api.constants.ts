@@ -16,7 +16,18 @@ export const API_URLS = {
 export const getImageUrl = (path: string | null | undefined): string => {
   if (!path) return API_URLS.noImage;
   if (path.startsWith('http')) return path;
-  return `${API_BASE_URL}${path}`;
+  // Normalize image path to always route through the UI host, via /images/
+  // If path is already absolute under /images, keep as is
+  let normalized = path;
+  if (!path.startsWith('/images/')) {
+    if (path.startsWith('/images')) {
+      normalized = path; // odd case, but keep as is
+    } else {
+      // Ensure the path points to the images directory
+      normalized = `/images/${path}`;
+    }
+  }
+  return `${API_BASE_URL}${normalized}`;
 };
 
 export const formatCurrency = (amount: number): string => {

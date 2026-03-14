@@ -9,7 +9,8 @@ import { CartService } from '../../services/cart.service';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   private authService = inject(AuthService);

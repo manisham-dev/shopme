@@ -1,0 +1,37 @@
+.about-container {
+  padding-top: 5rem;
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+.about-content {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.about-title {
+  font-size: 2.25rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+}
+
+.about-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--gold);
+  transition: text-decoration 0.3s;
+}
+
+.about-link:hover {
+  text-decoration: underline;
+}

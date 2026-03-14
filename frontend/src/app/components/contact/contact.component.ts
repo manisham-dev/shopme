@@ -6,17 +6,18 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="pt-20 min-h-screen bg-background">
-      <div class="max-w-4xl mx-auto px-4 py-12">
-        <h1 class="text-4xl font-bold text-white mb-6">Contact Us</h1>
-        <div class="text-white/80 space-y-4">
+    <div class="contact-container">
+      <div class="contact-content">
+        <h1 class="contact-title">Contact Us</h1>
+        <div class="contact-info">
           <p><strong>Email:</strong> info&#64;jewelcart.com</p>
           <p><strong>Phone:</strong> 123456789</p>
           <p><strong>Address:</strong> DL</p>
-          <p class="mt-6">Our team is available Monday to Friday, 9 AM to 6 PM EST.</p>
+          <p class="contact-hours">Our team is available Monday to Friday, 9 AM to 6 PM EST.</p>
         </div>
       </div>
     </div>
-  `
+  `,
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {}

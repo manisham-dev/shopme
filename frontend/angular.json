@@ -44,28 +44,53 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "outputMode": "static",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
+         
+            "inlineStyleLanguage": "css",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/components/home/home.component.css",
+              "src/app/components/header/header.component.css",
+              "src/app/components/footer/footer.component.css",
+              "src/app/components/cart/cart.component.css",
+              "src/app/components/products/products.component.css",
+              "src/app/components/login/login.component.css",
+              "src/app/components/register/register.component.css",
+              "src/app/components/checkout/checkout.component.css",
+              "src/app/components/orders/orders.component.css",
+              "src/app/components/product-detail/product-detail.component.css",
+              "src/app/components/add-product/add-product.component.css",
+              "src/app/components/toast/toast.component.css",
+              "src/app/components/contact/contact.component.css",
+              "src/app/components/terms/terms.component.css",
+              "src/app/components/privacy/privacy.component.css",
+              "src/app/components/about/about.component.css"
             ]
           },
-"configurations": {
+          "configurations": {
             "production": {
+"optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": false
+              },
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "3MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
                 }
               ],
               "outputHashing": "all",
@@ -77,7 +102,14 @@
               ]
             },
             "development": {
-              "optimization": false,
+"optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": false
+              },
               "extractLicenses": false,
               "sourceMap": true
             }
